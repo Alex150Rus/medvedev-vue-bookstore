@@ -54,7 +54,7 @@
   </div>
 </template>
 
-<style lang="sass">
+<style scoped lang="sass">
   .about
     &__list
       text-align: left
