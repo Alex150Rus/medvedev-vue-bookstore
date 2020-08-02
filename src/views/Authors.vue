@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+    <div>Авторы</div>
 </template>
 
 <script>
