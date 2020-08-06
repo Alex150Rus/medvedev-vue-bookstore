@@ -1,11 +1,19 @@
 <template>
 
     <v-container fluid>
+      <v-row>
+        <v-col :md=4 offset-md="4">
+          <v-text-field label="Название, год выпуска, категория, цена" v-model.trim.lazy="searchParam" v-on:input="findBooks">
+            <v-icon slot="append" color="red">mdi-magnify</v-icon>
+          </v-text-field>
+        </v-col>
+      </v-row>
       <v-row dense>
         <v-col
-            v-for="(book, idx) of books"
+            v-for="(book, idx) of computedBooks"
             :key="idx"
-            :cols=3
+            :lg=3
+            :md=4
         >
           <v-card
               class="mx-auto book mb-5"
@@ -25,30 +33,32 @@
             </v-card-subtitle>
 
             <v-card-actions>
-              <v-btn text>Share</v-btn>
+              <v-btn text>{{book.price}} руб</v-btn>
 
               <v-btn
                   color="purple"
                   text
               >
-                Explore
+                В корзину
               </v-btn>
 
-              <v-spacer></v-spacer>
+              <v-btn text>
+                <v-icon color="grey">mdi-heart</v-icon>
+              </v-btn>
 
               <v-btn
                   icon
-                  @click="show = !show"
+                  @click="chevronClick(idx)"
               >
-                <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                <v-icon>{{ shortDescriptionToggleState[idx] ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
               </v-btn>
             </v-card-actions>
 
             <v-expand-transition>
-              <div v-show="show">
+              <div :id="idx" v-show="shortDescriptionToggleState[idx]">
                 <v-divider></v-divider>
 
-                <v-card-text>
+                <v-card-text class="text-justify">
                   {{book.shortDescription}}
                 </v-card-text>
               </div>
@@ -67,15 +77,40 @@
         data(){
             return {
                 books: [],
-                show: false
+                shortDescriptionToggleState: [],
+                computedBooks: [],
+                searchParam: '',
             }
         },
         mounted() {
             fetch('../json/books.json')
                 .then(response => response.json())
-                .then(json => this.books = json);
+                .then(json => {
+                  this.books = this.computedBooks = json;
+                  this.shortDescriptionToggleState = new Array(this.books.length).fill(false);
+                })
+        },
+        methods: {
+          chevronClick: function (idx) {
+            this.shortDescriptionToggleState = this.shortDescriptionToggleState.map((elem, index) => {
+              if(index === idx)
+                return elem =!elem;
+            })
+          },
+          findBooks: function()  {
+            this.computedBooks = this.books;
+            const array = []
+            let elem;
+            let item = new RegExp(this.searchParam, 'i');
+            for (elem of this.books) {
+              if(item.test(elem.title) || item.test(elem.year) || item.test(elem.cat) || item.test(elem.price)) {
+                array.push(elem);
+              }
+            }
 
-        }
+            this.computedBooks = array;
+          }
+        },
     }
 </script>
 
