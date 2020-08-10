@@ -1,12 +1,18 @@
 <template>
 
-    <v-container fluid>
+    <v-container fluid class="ml-4 mr-4">
+      <v-row class="justify-center">
+        <h1 >Книги</h1>
+      </v-row>
       <v-row>
         <v-col :md=4 offset-md="4">
           <v-text-field label="Название, год выпуска, категория, цена" v-model.trim.lazy="searchParam" v-on:input="findBooks">
             <v-icon slot="append" color="red">mdi-magnify</v-icon>
           </v-text-field>
         </v-col>
+      </v-row>
+      <v-row class="justify-center">
+       <add-book-form  v-on:new-book="addNewBook"/>
       </v-row>
       <v-row dense>
         <v-col
@@ -72,9 +78,11 @@
 
 <script>
 
+    import AddBookForm from "@/components/addBookForm";
     export default {
         name: "Books",
-        data(){
+      components: {AddBookForm},
+      data(){
             return {
                 books: [],
                 computedBooks : [],
@@ -109,6 +117,10 @@
             }
 
             this.computedBooks = array;
+          },
+          addNewBook: function (payload) {
+            this.books.unshift(payload);
+              console.log(payload);
           }
         },
     }
