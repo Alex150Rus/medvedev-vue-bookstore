@@ -78,7 +78,6 @@
             return {
                 books: [],
                 shortDescriptionToggleState: [],
-                computedBooks: [],
                 searchParam: '',
             }
         },
