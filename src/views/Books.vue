@@ -77,6 +77,7 @@
         data(){
             return {
                 books: [],
+                computedBooks : [],
                 shortDescriptionToggleState: [],
                 searchParam: '',
             }
