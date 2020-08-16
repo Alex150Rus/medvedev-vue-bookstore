@@ -1,22 +1,30 @@
 [
   {
-    "ISBN": "",
-    "title": "",
-    "authors": "",
-    "img": "",
-    "shortDescription": "",
-    "tags": "",
-    "price": "",
-    "cat": ""
+    "fullName": "Джон Резиг",
+    "birthday": "8 may 1984",
+    "sex": "male",
+    "country": "USA",
+    "books": ["Секреты JavaScript ниндзя", "JavaScript. Профессиональные приемы программирования"]
   },
   {
-    "ISBN": "",
-    "title": "",
-    "authors": "",
-    "img": "",
-    "shortDescription": "",
-    "tags": "",
-    "price": "",
-    "cat": ""
+    "fullName": "Роберт Мартин",
+    "birthday": "1952",
+    "sex": "male",
+    "country": "",
+    "books": ["Чистый код", "Идеальный программист", "Быстрая разработка программ. Принципы, примеры, практика", "Чистая архитектура. Искусство разработки программного обеспечения "]
+  },
+  {
+    "fullName": "Дмитрий Котеров",
+    "birthday": "12 февраля 1982",
+    "sex": "male",
+    "country": "Russia",
+    "books": ["PHP 7" , "PHP5"]
+  },
+  {
+    "fullName": "Дэвид Флэнаган",
+    "birthday": "",
+    "sex": "male",
+    "country": "USA",
+    "books": ["JavaScript карманный справочник", "JavaScript подробное руководство"]
   }
 ]

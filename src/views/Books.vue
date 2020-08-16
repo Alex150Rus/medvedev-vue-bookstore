@@ -5,13 +5,13 @@
         <h1 >Книги</h1>
       </v-row>
       <v-row>
-        <v-col :md=4 offset-md="4">
+        <v-col :md=4 offset-md=4 :sm=8 offset-sm="2" class="pr-12">
           <v-text-field label="Название, год выпуска, категория, цена" v-model.trim.lazy="searchParam" v-on:input="findBooks">
             <v-icon slot="append" color="red">mdi-magnify</v-icon>
           </v-text-field>
         </v-col>
       </v-row>
-      <v-row class="justify-center">
+      <v-row class="justify-end">
        <add-book-form  v-on:new-book="addNewBook"/>
       </v-row>
       <v-row dense>
@@ -78,7 +78,7 @@
 
 <script>
 
-    import AddBookForm from "@/components/addBookForm";
+    import AddBookForm from "@/components/AddBookForm";
     export default {
         name: "Books",
       components: {AddBookForm},

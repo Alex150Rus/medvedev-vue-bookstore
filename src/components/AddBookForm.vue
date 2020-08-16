@@ -1,12 +1,31 @@
 <template>
-  <v-expansion-panels class="col-md-6">
-    <v-expansion-panel>
-      <v-expansion-panel-header>Добавить книгу</v-expansion-panel-header>
-      <v-expansion-panel-content>
+  <div class="text-center">
+    <v-dialog
+        v-model="dialog"
+        width="500"
+    >
+      <template v-slot:activator="{ on, attrs }">
+          <v-btn
+              color="green lighten-10"
+              dark
+              v-bind="attrs"
+              v-on="on"
+              class="mb-2 mr-10"
+          >
+            Добавить книгу
+          </v-btn>
+      </template>
+
+      <v-card>
+        <v-card-title class="headline grey lighten-2">
+          Информация о книге
+        </v-card-title>
+
         <v-form
             ref="form"
             v-model="valid"
             lazy-validation
+            class="ma-4"
         >
           <v-text-field
               v-model="title"
@@ -78,11 +97,12 @@
               :rules="yearRules"
               label="Год выпуска"
               required
+              class="mb-5"
           ></v-text-field>
 
           <v-btn
               color="error"
-              class="mr-4"
+              class="mr-4 mb-4"
               @click="reset"
           >
             Reset Form
@@ -90,7 +110,7 @@
 
           <v-btn
               color="warning"
-              class="mr-4"
+              class="mr-4 mb-4"
               @click="resetValidation"
           >
             Reset Validation
@@ -98,13 +118,28 @@
 
           <v-btn
               @click="submit"
+              class="mb-4"
           >
             submit
           </v-btn>
         </v-form>
-      </v-expansion-panel-content>
-    </v-expansion-panel>
-  </v-expansion-panels>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+              color="primary"
+              text
+              @click="dialog = false"
+          >
+            Закрыть
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+
 </template>
 
 <script>
@@ -112,7 +147,7 @@ export default {
   'name' : 'addBookForm',
   data: () => ({
     valid: true,
-
+    dialog: false,
 
     title: '',
     titleRules: [
