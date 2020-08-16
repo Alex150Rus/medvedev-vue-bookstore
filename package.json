@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "jest",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "jest",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.19.2",

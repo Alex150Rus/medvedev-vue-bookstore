@@ -1,5 +1,10 @@
 //import has from 'lodash.has';
 
+// Libraries
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+
+
 import BooksGrid from "@/components/books/BooksGrid";
 
 import {shallowMount, createLocalVue} from "@vue/test-utils";
@@ -17,8 +22,7 @@ describe('BooksGrid', () => {
             localVue,
             vuetify,
         })
-        console.log(wrapper.vm.pooks);
-        expect(wrapper.html()).toContain('v-btn')
+        console.log(wrapper.find('.v-btn'));
     })
 
     test('quantity of book cards to be equal to data.books length', () => {

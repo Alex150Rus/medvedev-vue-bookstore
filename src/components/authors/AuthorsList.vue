@@ -16,6 +16,7 @@
 <script>
 import axios from 'axios';
 export default {
+<<<<<<< HEAD
 name: "AuthorsList",
   data() {
     return {
@@ -26,6 +27,9 @@ name: "AuthorsList",
     axios.get('../json/authors.json')
         .then(response => this.authors = response.data)
   },
+=======
+name: "AuthorsList"
+>>>>>>> parent of 63facc3... test work now))
 }
 </script>
 
