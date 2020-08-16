@@ -3,6 +3,7 @@
     <v-expansion-panel
         v-for="(item,i) in 5"
         :key="i"
+        class="js-listItem"
     >
       <v-expansion-panel-header>Item</v-expansion-panel-header>
       <v-expansion-panel-content>
