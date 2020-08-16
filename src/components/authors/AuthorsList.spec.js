@@ -1,22 +1,19 @@
-import {shallowMount} from "@vue/test-utils";
+import {mount} from "@vue/test-utils";
 import AuthorsList from "@/components/authors/AuthorsList";
 
-import Vue from 'vue'
-import Vuetify from 'vuetify'
+//import has from 'lodash.has';
 
-Vue.use(Vuetify)
 
-const wrapper = shallowMount(AuthorsList);
+const wrapper = mount(AuthorsList);
 const vm = wrapper.vm;
-
 
 describe('AuthorsList', () => {
     test('it mounts wo errors', () => {
-
-        expect(wrapper.html()).toContain('v-expansion-panel-header')
+        console.log(wrapper.html());
+        expect(wrapper.html()).toContain('<v-expansion-panel')
     })
-    test('quantity of list items to be equal to data items length', () => {
+    test('quantity of list items to be equal to data.authors length', () => {
         const listItems = wrapper.findAll('.js-listItem');
-        expect(listItems.length).toEqual(vm.items);
+        expect(listItems.length).toEqual(vm.authors.length);
     })
 })

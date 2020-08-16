@@ -40,6 +40,7 @@
           <v-btn
               icon
               @click="chevronClick(idx)"
+              v-bind:id="idx"
           >
             <v-icon>{{ shortDescriptionToggleState[idx] ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
           </v-btn>
@@ -60,6 +61,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
 name: "BooksGrid",
   props: ['searchParam', 'newBook'],
@@ -70,10 +72,9 @@ name: "BooksGrid",
     }
   },
   mounted() {
-    fetch('../json/books.json')
-        .then(response => response.json())
-        .then(json => {
-          this.books = this.computedBooks = json;
+    axios.get('../json/books.json')
+        .then(response => {
+          this.books = this.computedBooks = response.data;
           this.shortDescriptionToggleState = new Array(this.books.length).fill(false);
         })
   },
