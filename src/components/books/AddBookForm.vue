@@ -228,6 +228,7 @@ export default {
           year: this.year,
         };
         this.$emit('new-book', book);
+        this.reset();
       }
     },
   },

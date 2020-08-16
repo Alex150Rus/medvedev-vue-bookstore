@@ -10,7 +10,7 @@
       <v-row class="justify-end">
        <add-book-form  v-on:new-book="addNewBook"/>
       </v-row>
-      <books-grid v-bind:searchParam="searchParam"/>
+      <books-grid v-bind:searchParam="searchParam" v-bind:newBook="newBook"/>
     </v-container>
 
 </template>
@@ -27,6 +27,7 @@
       data: () => {
         return {
           searchParam: '',
+          newBook: {},
         }
       },
       methods: {
@@ -34,8 +35,7 @@
           this.searchParam = searchParam;
         },
         addNewBook: function (payload) {
-          this.books.unshift(payload);
-          console.log(payload);
+          this.newBook = payload;
         }
       }
     }

@@ -62,7 +62,7 @@
 <script>
 export default {
 name: "BooksGrid",
-  props: ['searchParam'],
+  props: ['searchParam', 'newBook'],
   data(){
     return {
       books: [],
@@ -77,6 +77,11 @@ name: "BooksGrid",
           this.shortDescriptionToggleState = new Array(this.books.length).fill(false);
         })
   },
+  watch: {
+    newBook: function () {
+      this.books = this.books.concat([this.newBook])
+    }
+  },
   methods: {
     chevronClick: function (idx) {
       this.shortDescriptionToggleState = this.shortDescriptionToggleState.map((elem, index) => {
@@ -88,7 +93,6 @@ name: "BooksGrid",
   computed: {
       computedBooks: {
         get: function() {
-
           return this.books.filter((elem) => {
             const item = new RegExp(this.searchParam, 'i');
             return item.test(elem.title) || item.test(elem.year) || item.test(elem.cat) || item.test(elem.price)
