@@ -12,8 +12,8 @@
 </template>
 
 <script>
-    import AuthorsList from "@/components/AuthorsList";
-    
+    import AuthorsList from "@/components/authors/AuthorsList";
+
     export default {
       components: {AuthorsList},
         name: "Authors"
