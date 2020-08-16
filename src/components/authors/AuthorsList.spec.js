@@ -17,6 +17,6 @@ describe('AuthorsList', () => {
     })
     test('quantity of list items to be equal to data items length', () => {
         const listItems = wrapper.findAll('.js-listItem');
-        expect(listItems.length).toEqual(vm.data.items);
+        expect(listItems.length).toEqual(vm.items);
     })
 })

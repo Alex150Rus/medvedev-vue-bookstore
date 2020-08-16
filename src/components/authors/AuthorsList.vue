@@ -15,7 +15,12 @@
 
 <script>
 export default {
-name: "AuthorsList"
+name: "AuthorsList",
+  data() {
+    return {
+      items: 5
+    }
+  }
 }
 </script>
 
