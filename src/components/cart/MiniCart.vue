@@ -12,7 +12,7 @@
     <div class="miniCart__block"
          v-show="isVisible"
     >
-      миникорзина
+      {{$store.getters.miniCart}}
     </div>
   </div>
 

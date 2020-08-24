@@ -29,6 +29,7 @@
           <v-btn
               color="purple"
               text
+              v-on:click="$store.commit('addBook', book)"
           >
             В корзину
           </v-btn>
