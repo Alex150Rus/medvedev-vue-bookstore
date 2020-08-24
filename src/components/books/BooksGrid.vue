@@ -29,7 +29,7 @@
           <v-btn
               color="purple"
               text
-              v-on:click="$store.commit('addBook', book)"
+              v-on:click="addBook(book)"
           >
             В корзину
           </v-btn>
@@ -63,6 +63,7 @@
 
 <script>
 import axios from 'axios';
+import {mapMutations} from 'vuex';
 export default {
 name: "BooksGrid",
   props: ['searchParam', 'newBook'],
@@ -90,7 +91,10 @@ name: "BooksGrid",
         if(index === idx)
           return elem =!elem;
       })
-    }
+    },
+    ...mapMutations('miniCart', [
+        'addBook'
+    ])
   },
   computed: {
       computedBooks: {

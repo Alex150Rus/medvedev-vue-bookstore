@@ -5,20 +5,21 @@
       <v-badge
           inline
           v-bind:color="badgeColor"
-          content="0"
+          v-bind:content="qtyOfBooksInCart"
           class="miniCart__badge"
       ></v-badge>
     </div>
     <div class="miniCart__block"
          v-show="isVisible"
     >
-      {{$store.getters.miniCart}}
+      {{miniCart}}
     </div>
   </div>
 
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
 name: "MiniCart",
   data() {
@@ -34,6 +35,14 @@ name: "MiniCart",
     hideMiniCart() {
       this.isVisible = false;
     }
+  },
+  computed: {
+    qtyOfBooksInCart() {
+      return this.booksInCart ? this.booksInCart : '0';
+    },
+    ...mapGetters('miniCart',[
+        'miniCart', 'booksInCart'
+    ])
   }
 }
 </script>
