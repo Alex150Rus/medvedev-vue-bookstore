@@ -77,6 +77,8 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Книжный клуб Сова</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <mini-cart/>
     </v-app-bar>
 
     <v-main>
@@ -93,7 +95,10 @@
 </template>
 
 <script>
+import MiniCart from "@/components/cart/MiniCart";
+
 export default {
+  components: {MiniCart},
   props: {
     source: String,
   },

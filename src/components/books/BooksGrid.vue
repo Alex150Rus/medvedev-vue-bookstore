@@ -71,7 +71,7 @@ name: "BooksGrid",
       shortDescriptionToggleState: [],
     }
   },
-  mounted() {
+  created() {
     axios.get('../json/books.json')
         .then(response => {
           this.books = this.computedBooks = response.data;

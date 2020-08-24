@@ -1,47 +1,68 @@
-//import has from 'lodash.has';
+import has from 'lodash.has';
 
 // Libraries
-import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vue from 'vue';
+import Vuetify from 'vuetify';
 
 
 import BooksGrid from "@/components/books/BooksGrid";
 
-import {shallowMount, createLocalVue} from "@vue/test-utils";
+import {mount, createLocalVue} from "@vue/test-utils";
 const localVue = createLocalVue();
 
 describe('BooksGrid', () => {
-    let vuetify
+    let vuetify, wrapper;
 
     beforeEach(() => {
         vuetify = new Vuetify()
-    })
-
-    test('it mounts wo errors', () => {
-        const wrapper = shallowMount(BooksGrid, {
+            wrapper = mount(BooksGrid, {
             localVue,
             vuetify,
         })
-        console.log(wrapper.find('.v-btn'));
     })
 
-    test('quantity of book cards to be equal to data.books length', () => {
-        const wrapper = shallowMount(BooksGrid, {
-            localVue,
-            vuetify,
-        })
-        const vm = wrapper.vm;
-        const bookCards = wrapper.findAll('.book');
-        expect(bookCards.length).toEqual(vm.books.length);
+    test('data books length is equal to 5', () => {
+       expect(wrapper.vm.books.length).toEqual(5);
     })
 
-    test("clicking on 3rd chevron changes it's state to true", () => {
-        const wrapper = shallowMount(BooksGrid, {
-            localVue,
-            vuetify,
+    test('data books first element has property ISBN', () => {
+        expect(has(wrapper.vm.books, '0.ISBN')).toBeTruthy();
+    })
+
+    test('data shortDescriptionToggleState length is 5', ()=> {
+        expect(wrapper.vm.shortDescriptionToggleState.length).toEqual(5);
+    })
+    test('all elements of data set to false', () => {
+        expect(wrapper.vm.shortDescriptionToggleState.filter((item) => item).length).toEqual(0);
+    })
+    test('click on chevron3 sets shortDescriptionToggleState[3] to true', () => {
+        wrapper.find('.v-btn[id="3"]').trigger('click');
+        expect(wrapper.vm.shortDescriptionToggleState[3]).toBeTruthy()
+    })
+
+    test('setting NewBook props increases books length for 1', () => {
+        const booksLength = wrapper.vm.books.length
+        wrapper.setProps({ newBook: {
+            "ISBN": "978-5-699-80285-2",
+            "title": "Приключения Буратино",
+            "authors": "Джон Дакетт",
+            "img": "Буратино.jpg",
+            "shortDescription": "Эта книга про папу Карло",
+            "tags": "приключения, сказки",
+            "price": 1298,
+            "cat": "java script",
+            "year": 1950
+            } })
+        wrapper.vm.$options.watch.newBook.call(wrapper.vm);
+        const newBooksLength =  wrapper.vm.books.length;
+        expect(newBooksLength-booksLength).toEqual(1);
+    })
+
+    test('searchParam j returns 2 books', () => {
+        wrapper.setProps({
+            searchParam: 'j'
         })
-        const vm = wrapper.vm;
-        wrapper.find('.v-btn').trigger('click')
-        expect(vm.shortDescriptionToggleState[3]).toBeTruthy();
+
+        expect(wrapper.vm.computedBooks.length).toBe(2);
     })
 })

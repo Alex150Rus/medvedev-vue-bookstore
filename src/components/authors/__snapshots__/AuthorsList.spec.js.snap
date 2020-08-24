@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`AuthorsList it mounts wo errors 1`] = `<div class="v-item-group theme--light v-expansion-panels"></div>`;
