@@ -34,8 +34,8 @@
             В корзину
           </v-btn>
 
-          <v-btn text>
-            <v-icon color="grey">mdi-heart</v-icon>
+          <v-btn text @click="addToFavsAction(book)">
+            <v-icon :color="getColor(book)">mdi-heart</v-icon>
           </v-btn>
 
           <v-btn
@@ -63,7 +63,7 @@
 
 <script>
 import axios from 'axios';
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 export default {
 name: "BooksGrid",
   props: ['searchParam', 'newBook'],
@@ -92,9 +92,13 @@ name: "BooksGrid",
           return elem =!elem;
       })
     },
+    getColor(book) {
+      return this.getFavs.find(elem => elem.ISBN === book.ISBN) === undefined ? 'grey' : 'red';
+    },
     ...mapActions('miniCart', [
       'addBookToCart'
-    ])
+    ]),
+    ...mapActions('favourites', ['addToFavsAction', 'isBookInFavs'])
   },
   computed: {
       computedBooks: {
@@ -108,8 +112,8 @@ name: "BooksGrid",
           //без сетера ругается на его отсутствие
             return this.books;
         }
-
-      }
+      },
+    ...mapGetters('favourites', ['getFavs']),
   }
 }
 </script>
