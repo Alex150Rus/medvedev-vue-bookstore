@@ -1,5 +1,5 @@
 <template>
-  <v-row dense>
+  <v-row dense class="booksGrid">
     <v-col
         v-for="(book, idx) of computedBooks"
         :key="idx"
