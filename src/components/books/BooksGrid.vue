@@ -29,7 +29,7 @@
           <v-btn
               color="purple"
               text
-              v-on:click="addBookToCart(book)"
+              @click="addBookToCart(book)"
           >
             В корзину
           </v-btn>
@@ -41,7 +41,7 @@
           <v-btn
               icon
               @click="chevronClick(idx)"
-              v-bind:id="idx"
+              :id="idx"
           >
             <v-icon>{{ shortDescriptionToggleState[idx] ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
           </v-btn>

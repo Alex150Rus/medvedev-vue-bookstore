@@ -5,12 +5,12 @@
         <h1 >Книги</h1>
       </v-row>
       <v-row>
-        <books-search-input v-on:searchParamChange="setSearchParam"/>
+        <books-search-input @searchParamChange="setSearchParam"/>
       </v-row>
       <v-row class="justify-end">
-       <add-book-form  v-on:new-book="addNewBook"/>
+       <add-book-form  @new-book="addNewBook"/>
       </v-row>
-      <books-grid v-bind:searchParam="searchParam" v-bind:newBook="newBook"/>
+      <books-grid :searchParam="searchParam" :newBook="newBook"/>
     </v-container>
 
 </template>

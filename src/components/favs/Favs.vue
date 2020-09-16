@@ -3,8 +3,8 @@
    <v-icon class="favs__icon" color="red">mdi-heart</v-icon>
    <v-badge
        inline
-       v-bind:color="badgeColor"
-       v-bind:content="getFavsQty"
+       :color="badgeColor"
+       :content="getFavsQty"
        class="favs__badge"
    ></v-badge>
  </div>
