@@ -16,7 +16,7 @@ const getters = {
     },
     getTotalAmount(state) {
         return state.totalAmount;
-    }
+    },
 }
 
 const mutations = {
@@ -40,8 +40,10 @@ const mutations = {
     setTotalQty(state) {
         state.totalQty++;
     },
-    reduceTotalQty(state){
-        state.totalQty--
+    reduceTotalQty(state, isbn){
+
+        const bookQty = state.miniCart.find(book => book.ISBN === isbn).qty;
+        state.totalQty = state.totalQty - bookQty;
     },
     setTotalAmount(state) {
         var initialValue = 0;
@@ -50,10 +52,10 @@ const mutations = {
 }
 
 const actions = {
-    removeBookFromCart(context, payload) {
-        context.commit('removeBook', payload);
+    removeBookFromCart(context, isbn) {
+        context.commit('reduceTotalQty', isbn);
+        context.commit('removeBook', isbn);
         context.commit('setTotalAmount');
-        context.commit('reduceTotalQty');
     },
     addBookToCart(context, payload){
         context.commit('addBook', payload)
