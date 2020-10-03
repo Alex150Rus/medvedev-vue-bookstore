@@ -37,30 +37,29 @@ const mutations = {
     removeBook(state, isbn){
         state.miniCart = state.miniCart.filter(item => item.ISBN !== isbn);
     },
-    setTotalQty(state) {
+    increaseTotalQtyOfBooks(state) {
         state.totalQty++;
     },
-    reduceTotalQty(state, isbn){
-
+    reduceTotalQtyOfBooks(state, isbn){
         const bookQty = state.miniCart.find(book => book.ISBN === isbn).qty;
         state.totalQty = state.totalQty - bookQty;
     },
-    setTotalAmount(state) {
-        var initialValue = 0;
+    increaseTotalAmountOfBooks(state) {
+        const initialValue = 0;
         state.totalAmount = state.miniCart.reduce((prev, curr) => prev + curr.qty*curr.price, initialValue)
     }
 }
 
 const actions = {
     removeBookFromCart(context, isbn) {
-        context.commit('reduceTotalQty', isbn);
+        context.commit('reduceTotalQtyOfBooks', isbn);
         context.commit('removeBook', isbn);
-        context.commit('setTotalAmount');
+        context.commit('increaseTotalAmountOfBooks');
     },
     addBookToCart(context, payload){
         context.commit('addBook', payload)
-        context.commit('setTotalQty')
-        context.commit('setTotalAmount')
+        context.commit('increaseTotalQtyOfBooks')
+        context.commit('increaseTotalAmountOfBooks')
     }
 }
 
