@@ -29,17 +29,19 @@
           <v-btn
               color="purple"
               text
+              @click="addBookToCart(book)"
           >
             В корзину
           </v-btn>
 
-          <v-btn text>
-            <v-icon color="grey">mdi-heart</v-icon>
+          <v-btn text @click="doFavsArrayMutation(book)">
+            <v-icon :color="isInFavs(book)">mdi-heart</v-icon>
           </v-btn>
 
           <v-btn
               icon
               @click="chevronClick(idx)"
+              :id="idx"
           >
             <v-icon>{{ shortDescriptionToggleState[idx] ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
           </v-btn>
@@ -60,6 +62,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+import {mapActions, mapGetters, mapMutations} from 'vuex';
 export default {
 name: "BooksGrid",
   props: ['searchParam', 'newBook'],
@@ -69,11 +73,11 @@ name: "BooksGrid",
       shortDescriptionToggleState: [],
     }
   },
-  mounted() {
-    fetch('../json/books.json')
-        .then(response => response.json())
-        .then(json => {
-          this.books = this.computedBooks = json;
+  created() {
+  console.log(this.getFavs);
+    axios.get('../json/books.json')
+        .then(response => {
+          this.books = this.computedBooks = response.data;
           this.shortDescriptionToggleState = new Array(this.books.length).fill(false);
         })
   },
@@ -88,7 +92,14 @@ name: "BooksGrid",
         if(index === idx)
           return elem =!elem;
       })
-    }
+    },
+    isInFavs: function(book) {
+     return this.getFavs.find(elem => elem.ISBN === book.ISBN) === undefined ? 'grey' : 'red';
+    },
+    ...mapActions('miniCart', [
+      'addBookToCart'
+    ]),
+    ...mapMutations('favourites', ['doFavsArrayMutation'])
   },
   computed: {
       computedBooks: {
@@ -102,8 +113,9 @@ name: "BooksGrid",
           //без сетера ругается на его отсутствие
             return this.books;
         }
+      },
 
-      }
+    ...mapGetters('favourites', ['getFavs']),
   }
 }
 </script>

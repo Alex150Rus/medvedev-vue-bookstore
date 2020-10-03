@@ -77,6 +77,9 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Книжный клуб Сова</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <favs/>
+      <mini-cart/>
     </v-app-bar>
 
     <v-main>
@@ -93,7 +96,11 @@
 </template>
 
 <script>
+import MiniCart from "@/components/cart/MiniCart";
+import Favs from "@/components/favs/Favs";
+
 export default {
+  components: {MiniCart, Favs},
   props: {
     source: String,
   },

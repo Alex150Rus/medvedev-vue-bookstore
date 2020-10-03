@@ -5,7 +5,7 @@
     </v-row>
     <v-row>
       <v-col :md=4 offset-md=4 :sm=8 offset-sm="2">
-        <authors-list></authors-list>
+        <authors-list/>
       </v-col>
     </v-row>
   </v-container>
