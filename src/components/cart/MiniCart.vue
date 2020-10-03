@@ -1,11 +1,11 @@
 <template>
-  <div class="miniCart" v-on:mouseenter="showMinicart" v-on:mouseleave="hideMiniCart">
+  <div class="miniCart" @mouseenter="showMinicart" @mouseleave="hideMiniCart">
     <div>
       <v-icon class="miniCart__icon">mdi-cart</v-icon>
       <v-badge
           inline
-          v-bind:color="badgeColor"
-          v-bind:content="qtyOfBooksInCart"
+          :color="badgeColor"
+          :content="qtyOfBooksInCart"
           class="miniCart__badge"
       ></v-badge>
     </div>
