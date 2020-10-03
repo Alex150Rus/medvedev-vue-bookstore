@@ -9,7 +9,7 @@ const vm = wrapper.vm;
 
 describe('AuthorsList', () => {
     test('it mounts wo errors', () => {
-        console.log(wrapper.html());
+        //console.log(wrapper.html());
         expect(wrapper.find({ name: 'v-expansion-panel-content' }).exists()).toBe(true);
     })
     test('quantity of list items to be equal to data.authors length', () => {
