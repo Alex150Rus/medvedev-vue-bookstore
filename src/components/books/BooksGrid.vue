@@ -34,8 +34,8 @@
             В корзину
           </v-btn>
 
-          <v-btn text @click="addToFavsAction(book)">
-            <v-icon :color="getColor(book)">mdi-heart</v-icon>
+          <v-btn text @click="doFavsArrayMutation(book)">
+            <v-icon :color="isInFavs(book)">mdi-heart</v-icon>
           </v-btn>
 
           <v-btn
@@ -63,7 +63,7 @@
 
 <script>
 import axios from 'axios';
-import {mapActions, mapGetters} from 'vuex';
+import {mapActions, mapGetters, mapMutations} from 'vuex';
 export default {
 name: "BooksGrid",
   props: ['searchParam', 'newBook'],
@@ -74,6 +74,7 @@ name: "BooksGrid",
     }
   },
   created() {
+  console.log(this.getFavs);
     axios.get('../json/books.json')
         .then(response => {
           this.books = this.computedBooks = response.data;
@@ -92,13 +93,13 @@ name: "BooksGrid",
           return elem =!elem;
       })
     },
-    getColor(book) {
-      return this.getFavs.find(elem => elem.ISBN === book.ISBN) === undefined ? 'grey' : 'red';
+    isInFavs: function(book) {
+     return this.getFavs.find(elem => elem.ISBN === book.ISBN) === undefined ? 'grey' : 'red';
     },
     ...mapActions('miniCart', [
       'addBookToCart'
     ]),
-    ...mapActions('favourites', ['addToFavsAction', 'isBookInFavs'])
+    ...mapMutations('favourites', ['doFavsArrayMutation'])
   },
   computed: {
       computedBooks: {
@@ -113,6 +114,7 @@ name: "BooksGrid",
             return this.books;
         }
       },
+
     ...mapGetters('favourites', ['getFavs']),
   }
 }
