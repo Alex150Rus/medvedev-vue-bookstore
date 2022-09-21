@@ -16,7 +16,7 @@
     "lodash.has": "^4.5.2",
     "vue": "^2.6.11",
     "vue-router": "^3.4.3",
-    "vuetify": "^2.3.8",
+    "vuetify": "^2.6.10",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
